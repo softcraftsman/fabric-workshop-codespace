@@ -20,7 +20,7 @@ This repository fails closed until an organizer customizes
 
 The [Multi-AMC example](examples/multi-amc-workshop.json) shows how a workshop
 profile can add domain-specific protections without changing the reusable
-cockpit.
+Codespace.
 
 ## Participant start
 
