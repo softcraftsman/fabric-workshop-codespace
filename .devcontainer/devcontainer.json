@@ -1,0 +1,53 @@
+{
+  "name": "Fabric Workshop Cockpit",
+  "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
+  "remoteUser": "vscode",
+  "containerEnv": {
+    "COPILOT_CLI_VERSION": "1.0.80"
+  },
+  "features": {
+    "ghcr.io/devcontainers/features/azure-cli:1": {},
+    "ghcr.io/devcontainers/features/node:1": {
+      "version": "22"
+    }
+  },
+  "hostRequirements": {
+    "cpus": 2,
+    "memory": "8gb",
+    "storage": "16gb"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "GitHub.copilot",
+        "GitHub.copilot-chat",
+        "fabric.vscode-fabric",
+        "fabric.vscode-fabric-mcp-server",
+        "analysis-services.TMDL",
+        "analysis-services.powerbi-modeling-mcp",
+        "ms-python.python",
+        "ms-python.vscode-pylance",
+        "ms-toolsai.jupyter",
+        "ms-mssql.mssql"
+      ],
+      "settings": {
+        "python.defaultInterpreterPath": "${workspaceFolder}/.venv/bin/python",
+        "python.terminal.activateEnvironment": true,
+        "workbench.startupEditor": "readme",
+        "workbench.editorAssociations": {
+          "*.md": "vscode.markdown.preview.editor"
+        },
+        "github.copilot.enable": {
+          "*": true,
+          "markdown": true,
+          "python": true
+        },
+        "files.exclude": {
+          "**/.ipynb_checkpoints": true,
+          "**/__pycache__": true
+        }
+      }
+    }
+  }
+}

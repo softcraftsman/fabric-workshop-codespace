@@ -1,0 +1,73 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "Cockpit: Configure team workspace",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        ".devcontainer/scripts/configure-workspace.sh",
+        "${input:workspaceName}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Cockpit: Show team workspace",
+      "type": "shell",
+      "command": "cat .workspace/team-context.md",
+      "problemMatcher": []
+    },
+    {
+      "label": "Cockpit: Verify environment",
+      "type": "shell",
+      "command": "bash .devcontainer/scripts/verify-environment.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Cockpit: Verify required extensions",
+      "type": "shell",
+      "command": "bash .devcontainer/scripts/verify-extensions.sh",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fabric CLI: Sign in",
+      "type": "shell",
+      "command": ".venv/bin/fab auth login",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fabric CLI: Sign in with device code",
+      "type": "shell",
+      "command": "bash",
+      "args": [
+        ".devcontainer/scripts/fabric-device-login.sh",
+        "${input:tenantId}"
+      ],
+      "problemMatcher": []
+    },
+    {
+      "label": "Fabric CLI: List accessible workspaces",
+      "type": "shell",
+      "command": ".venv/bin/fab ls",
+      "problemMatcher": []
+    },
+    {
+      "label": "Fabric CLI: Verify configured workspace",
+      "type": "shell",
+      "command": "bash .devcontainer/scripts/verify-live-workspace.sh",
+      "problemMatcher": []
+    }
+  ],
+  "inputs": [
+    {
+      "id": "workspaceName",
+      "type": "promptString",
+      "description": "Exact assigned writable Fabric workspace name"
+    },
+    {
+      "id": "tenantId",
+      "type": "promptString",
+      "description": "Microsoft Entra tenant ID (GUID)"
+    }
+  ]
+}

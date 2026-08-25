@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "GitHub.copilot",
+    "GitHub.copilot-chat",
+    "fabric.vscode-fabric",
+    "fabric.vscode-fabric-mcp-server",
+    "analysis-services.TMDL",
+    "analysis-services.powerbi-modeling-mcp",
+    "ms-python.python",
+    "ms-python.vscode-pylance",
+    "ms-toolsai.jupyter",
+    "ms-mssql.mssql"
+  ]
+}

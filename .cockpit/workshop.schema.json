@@ -1,0 +1,70 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "title": "Fabric Workshop Cockpit Configuration",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schemaVersion",
+    "configured",
+    "workshopName",
+    "workspace",
+    "dataHandlingRules",
+    "additionalInstructions"
+  ],
+  "properties": {
+    "$schema": {
+      "type": "string"
+    },
+    "schemaVersion": {
+      "const": 1
+    },
+    "configured": {
+      "type": "boolean"
+    },
+    "workshopName": {
+      "type": "string",
+      "minLength": 1
+    },
+    "workspace": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "namePattern",
+        "namePatternDescription",
+        "protectedWorkspaces"
+      ],
+      "properties": {
+        "namePattern": {
+          "type": "string",
+          "minLength": 1
+        },
+        "namePatternDescription": {
+          "type": "string",
+          "minLength": 1
+        },
+        "protectedWorkspaces": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          },
+          "uniqueItems": true
+        }
+      }
+    },
+    "dataHandlingRules": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    },
+    "additionalInstructions": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      }
+    }
+  }
+}

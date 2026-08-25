@@ -1,0 +1,7 @@
+.venv/
+.workspace/
+.github/instructions/workshop.instructions.md
+__pycache__/
+*.py[cod]
+.ipynb_checkpoints/
+.DS_Store

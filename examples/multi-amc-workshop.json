@@ -1,0 +1,24 @@
+{
+  "$schema": "../.cockpit/workshop.schema.json",
+  "schemaVersion": 1,
+  "configured": true,
+  "workshopName": "Multi-AMC Fabric Workshop",
+  "workspace": {
+    "namePattern": "^.+$",
+    "namePatternDescription": "Enter the exact assigned Multi-AMC team workspace name.",
+    "protectedWorkspaces": [
+      "Multi-AMC Hack",
+      "Multi-AMC Hack Modeling"
+    ]
+  },
+  "dataHandlingRules": [
+    "Do not download patient-level data, PHI, credentials, tokens, or connection strings into the Codespace.",
+    "Use synthetic, public, aggregate, or explicitly approved data.",
+    "Label Synthea and supplemental events as synthetic.",
+    "Keep published CMS ratings distinct from demonstration calculations."
+  ],
+  "additionalInstructions": [
+    "Preserve shared grains, keys, provenance, CMS labels, and synthetic-data disclosures.",
+    "Publish only reviewed team outputs to the organizer-designated integration workspace."
+  ]
+}
