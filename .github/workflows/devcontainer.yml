@@ -4,7 +4,7 @@ on:
   pull_request:
     paths:
       - ".devcontainer/**"
-      - ".cockpit/**"
+      - ".codespace/**"
       - ".github/workflows/devcontainer.yml"
       - "tests/**"
   push:
@@ -12,7 +12,7 @@ on:
       - main
     paths:
       - ".devcontainer/**"
-      - ".cockpit/**"
+      - ".codespace/**"
       - ".github/workflows/devcontainer.yml"
       - "tests/**"
   schedule:

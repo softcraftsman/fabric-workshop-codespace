@@ -3,7 +3,7 @@
 ## Create and configure the workshop repository
 
 1. Create a private repository from this template.
-2. Edit `.cockpit/workshop.json`.
+2. Edit `.codespace/workshop.json`.
 3. Declare every governed or shared workspace in `protectedWorkspaces`.
 4. Restrict `namePattern` when team workspace names follow a known convention.
 5. Add workshop-specific data-handling rules and instructions.
@@ -11,7 +11,7 @@
 7. Require pull-request review for configuration, devcontainer, workflow, and
    Copilot-instruction changes.
 
-The cockpit generates `.workspace/team-context.md` from this one file. Do not
+The Codespace setup generates `.workspace/team-context.md` from this one file. Do not
 duplicate workshop names or protected workspace lists in scripts or Copilot
 instructions.
 
@@ -80,7 +80,7 @@ upstream template; leave it disabled on short-lived workshop repositories.
 | Script | Purpose |
 |---|---|
 | `post-create.sh` | Creates the virtual environment, installs pinned CLIs, initializes context, and verifies tooling. |
-| `configure-workspace.sh` | Generates participant context from `.cockpit/workshop.json` and the assigned workspace name. |
+| `configure-workspace.sh` | Generates participant context from `.codespace/workshop.json` and the assigned workspace name. |
 | `verify-environment.sh` | Confirms required command-line tools and generated context. |
 | `verify-extensions.sh` | Confirms required VS Code extensions after the editor connects. |
 | `fabric-device-login.sh` | Provides an interactive device-code fallback without persisting tokens in the repository. |

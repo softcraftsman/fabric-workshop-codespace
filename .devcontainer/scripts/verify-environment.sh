@@ -24,4 +24,4 @@ if [[ ! -f "${repo_root}/.workspace/team-context.md" ]]; then
   exit 1
 fi
 
-echo "Cockpit tooling is available. Fabric sign-in remains user-specific."
+echo "Codespace tooling is available. Fabric sign-in remains user-specific."

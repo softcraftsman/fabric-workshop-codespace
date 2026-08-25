@@ -23,7 +23,7 @@ interactive shell it opens. The task verifies the configured workspace before
 opening that shell. Run subsequent Fabric CLI commands in the same shell;
 other VS Code task terminals do not inherit its temporary tokens.
 
-Do not distribute service-principal secrets through the cockpit. If CLI
+Do not distribute service-principal secrets through the Codespace. If CLI
 authentication remains unavailable, use Fabric Explorer for live discovery
 and item access.
 

@@ -30,10 +30,10 @@ verify = load_module(
 class WorkshopConfigurationTests(unittest.TestCase):
     def setUp(self):
         self.generic = configure.load_config(
-            ROOT / ".cockpit" / "workshop.json"
+            ROOT / ".codespace" / "workshop.json"
         )
         self.multi_amc = configure.load_config(
-            ROOT / "examples" / "multi-amc-workshop.json"
+            ROOT / ".codespace" / "multi-amc-workshop.json"
         )
         self.temp_dir = tempfile.TemporaryDirectory()
         self.context_dir = Path(self.temp_dir.name)

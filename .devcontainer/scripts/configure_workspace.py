@@ -139,7 +139,7 @@ def configure_workspace(
         else:
             lines.extend(
                 [
-                    "The organizer must customize `.cockpit/workshop.json` and "
+                    "The organizer must customize `.codespace/workshop.json` and "
                     "set `configured` to `true` before participant use.",
                     "",
                 ]
@@ -156,7 +156,7 @@ def configure_workspace(
 
     if not config["configured"]:
         raise ValueError(
-            "Organizer setup is incomplete. Customize .cockpit/workshop.json "
+            "Organizer setup is incomplete. Customize .codespace/workshop.json "
             "and set configured to true."
         )
     if "\n" in workspace_name or "\r" in workspace_name:
@@ -248,7 +248,7 @@ def write_copilot_instructions(config: dict[str, Any], instructions_file: Path) 
 def main() -> int:
     repo_root = Path(__file__).resolve().parents[2]
     configured_path = os.environ.get(
-        "COCKPIT_CONFIG", ".cockpit/workshop.json"
+        "CODESPACE_CONFIG", ".codespace/workshop.json"
     )
     config_path = Path(configured_path)
     if not config_path.is_absolute():

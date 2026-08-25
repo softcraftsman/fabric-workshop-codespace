@@ -1,4 +1,4 @@
-# Fabric Workshop Cockpit
+# Fabric Workshop Codespace
 
 This Codespace is a control surface for live, participant-owned Microsoft
 Fabric items. Fabric remains the runtime, collaboration surface, and security

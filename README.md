@@ -8,7 +8,7 @@ security boundary.
 ## Organizer setup
 
 This repository fails closed until an organizer customizes
-[`.cockpit/workshop.json`](.cockpit/workshop.json):
+[`.codespace/workshop.json`](.codespace/workshop.json):
 
 1. Create a repository from this GitHub template.
 2. Set the workshop name, workspace-name rule, protected workspaces,
@@ -18,7 +18,7 @@ This repository fails closed until an organizer customizes
 5. Launch a clean Codespace and complete the participant-equivalent acceptance
    test before distributing the repository.
 
-The [Multi-AMC example](examples/multi-amc-workshop.json) shows how a workshop
+The [Multi-AMC example](.codespace/multi-amc-workshop.json) shows how a workshop
 profile can add domain-specific protections without changing the reusable
 Codespace.
 
@@ -70,11 +70,10 @@ controls and recovery expectations.
 
 | Path | Purpose |
 |---|---|
-| `.cockpit/workshop.json` | Single source of workshop-specific configuration |
+| `.codespace/` | Workshop configuration, schema, and example profile |
 | `.devcontainer/` | Codespaces image, installation, authentication, and verification |
 | `.github/copilot-instructions.md` | Reusable mutation guardrails |
 | `.vscode/` | Participant tasks and editor defaults |
-| `examples/` | Example workshop profiles |
 | `guidance/` | Organizer and participant safety guidance |
 | `tests/` | Configuration and exact-workspace verification tests |
 

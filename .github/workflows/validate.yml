@@ -21,14 +21,14 @@ jobs:
         run: python -m pip install check-jsonschema
       - name: Validate JSON
         run: |
-          find .cockpit .devcontainer .vscode examples \
+          find .codespace .devcontainer .vscode \
             -type f -name '*.json' -print0 |
             xargs -0 -r -n1 python -m json.tool >/dev/null
       - name: Validate workshop profiles
         run: |
           check-jsonschema \
-            --schemafile .cockpit/workshop.schema.json \
-            .cockpit/workshop.json examples/*.json
+            --schemafile .codespace/workshop.schema.json \
+            .codespace/workshop.json .codespace/multi-amc-workshop.json
       - name: Validate shell syntax
         run: |
           find .devcontainer/scripts -type f -name '*.sh' -print0 |
