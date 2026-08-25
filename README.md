@@ -1,4 +1,4 @@
-# Fabric Workshop Cockpit
+# Fabric Workshop Codespace
 
 A reusable GitHub Codespaces control surface for Microsoft Fabric workshops.
 Participants receive consistent Fabric, Copilot, semantic-modeling, notebook,
