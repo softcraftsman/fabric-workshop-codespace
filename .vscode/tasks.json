@@ -2,7 +2,7 @@
   "version": "2.0.0",
   "tasks": [
     {
-      "label": "Cockpit: Configure team workspace",
+      "label": "Codespace: Configure team workspace",
       "type": "shell",
       "command": "bash",
       "args": [
@@ -12,19 +12,19 @@
       "problemMatcher": []
     },
     {
-      "label": "Cockpit: Show team workspace",
+      "label": "Codespace: Show team workspace",
       "type": "shell",
       "command": "cat .workspace/team-context.md",
       "problemMatcher": []
     },
     {
-      "label": "Cockpit: Verify environment",
+      "label": "Codespace: Verify environment",
       "type": "shell",
       "command": "bash .devcontainer/scripts/verify-environment.sh",
       "problemMatcher": []
     },
     {
-      "label": "Cockpit: Verify required extensions",
+      "label": "Codespace: Verify required extensions",
       "type": "shell",
       "command": "bash .devcontainer/scripts/verify-extensions.sh",
       "problemMatcher": []

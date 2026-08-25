@@ -6,7 +6,7 @@ name_file="${repo_root}/.workspace/team-workspace-name"
 fab="${repo_root}/.venv/bin/fab"
 
 if [[ ! -s "${name_file}" ]]; then
-  echo "Run the Cockpit: Configure team workspace task first." >&2
+  echo "Run the Codespace: Configure team workspace task first." >&2
   exit 1
 fi
 

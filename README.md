@@ -27,7 +27,7 @@ Codespace.
 1. Open Fabric Explorer from the Fabric icon in the Activity Bar. Sign in and
    select the organizer-designated Microsoft Entra tenant.
 2. Select your assigned workspace in Fabric Explorer.
-3. Run **Tasks: Run Task > Cockpit: Configure team workspace** and enter the
+3. Run **Tasks: Run Task > Codespace: Configure team workspace** and enter the
    exact same workspace name.
 4. Run **Fabric CLI: Sign in** and then **Fabric CLI: Verify configured
    workspace**.

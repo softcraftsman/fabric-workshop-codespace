@@ -19,11 +19,11 @@ cat <<'MESSAGE'
 
 Fabric Workshop Cockpit is ready.
 
-1. Run "Cockpit: Verify required extensions".
+1. Run "Codespace: Verify required extensions".
 2. Open Copilot Chat and send a test prompt.
 3. Run "copilot" and use /login if authentication is required.
 4. Confirm the organizer configured .cockpit/workshop.json.
-5. Run "Cockpit: Configure team workspace".
+5. Run "Codespace: Configure team workspace".
 6. Run "Fabric: Sign in" and select the correct tenant.
 7. Run "Fabric CLI: Sign in". Use the device-code task in browser Codespaces.
 8. Confirm the same workspace in Fabric Explorer and Fabric CLI.

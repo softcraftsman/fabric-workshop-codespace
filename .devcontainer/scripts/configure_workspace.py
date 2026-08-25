@@ -131,7 +131,7 @@ def configure_workspace(
         if config["configured"]:
             lines.extend(
                 [
-                    "Run **Cockpit: Configure team workspace** before asking "
+                    "Run **Codespace: Configure team workspace** before asking "
                     "Copilot to create or modify a Fabric item.",
                     "",
                 ]
