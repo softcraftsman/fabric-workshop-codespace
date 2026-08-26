@@ -22,7 +22,7 @@ Fabric Workshop Codespace is ready.
 1. Run "Codespace: Verify required extensions".
 2. Open Copilot Chat and send a test prompt.
 3. Run "copilot" and use /login if authentication is required.
-4. Confirm the organizer configured .codespace/workshop.json.
+4. Review the optional workshop settings in .codespace/workshop.json.
 5. Run "Codespace: Configure team workspace".
 6. Run "Fabric: Sign in" and select the correct tenant.
 7. Run "Fabric CLI: Sign in". Use the device-code task in browser Codespaces.

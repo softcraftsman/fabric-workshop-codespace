@@ -41,18 +41,17 @@ class WorkshopConfigurationTests(unittest.TestCase):
     def tearDown(self):
         self.temp_dir.cleanup()
 
-    def test_template_fails_closed(self):
-        with self.assertRaisesRegex(ValueError, "Organizer setup is incomplete"):
-            configure.configure_workspace(
-                self.generic, self.context_dir, "Team Workspace"
-            )
-
+    def test_default_configuration_is_ready_to_use(self):
+        result = configure.configure_workspace(
+            self.generic, self.context_dir, "Team Workspace"
+        )
+        self.assertEqual(result, "Team Workspace")
         status = configure.configure_workspace(
             self.generic, self.context_dir, ""
         )
-        self.assertEqual(status, "ORGANIZER SETUP REQUIRED")
+        self.assertEqual(status, "UNCONFIGURED")
         context = (self.context_dir / "team-context.md").read_text()
-        self.assertIn("ORGANIZER SETUP REQUIRED", context)
+        self.assertIn("Codespace: Configure team workspace", context)
 
     def test_multi_amc_profile_preserves_protected_workspaces(self):
         with self.assertRaisesRegex(ValueError, "is protected"):
@@ -92,7 +91,7 @@ class WorkshopConfigurationTests(unittest.TestCase):
     def test_invalid_configuration_is_rejected(self):
         path = self.context_dir / "invalid.json"
         path.write_text(json.dumps({"schemaVersion": 1}), encoding="utf-8")
-        with self.assertRaisesRegex(ValueError, "configured must be"):
+        with self.assertRaisesRegex(ValueError, "workshopName must be"):
             configure.load_config(path)
 
     def test_unexpected_configuration_field_is_rejected(self):

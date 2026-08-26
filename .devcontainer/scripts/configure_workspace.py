@@ -33,7 +33,6 @@ def load_config(config_path: Path) -> dict[str, Any]:
     expected_keys = {
         "$schema",
         "schemaVersion",
-        "configured",
         "workshopName",
         "workspace",
         "dataHandlingRules",
@@ -46,9 +45,6 @@ def load_config(config_path: Path) -> dict[str, Any]:
         )
     if config.get("schemaVersion") != 1:
         raise ValueError("schemaVersion must be 1")
-    if not isinstance(config.get("configured"), bool):
-        raise ValueError("configured must be true or false")
-
     config["workshopName"] = _nonempty_string(
         config.get("workshopName"), "workshopName"
     )
@@ -115,11 +111,7 @@ def configure_workspace(
 
     if not workspace_name:
         name_file.unlink(missing_ok=True)
-        status = (
-            "UNCONFIGURED"
-            if config["configured"]
-            else "ORGANIZER SETUP REQUIRED"
-        )
+        status = "UNCONFIGURED"
         lines = [
             "# Fabric Workshop Context",
             "",
@@ -128,37 +120,23 @@ def configure_workspace(
             f"**Status:** {status}",
             "",
         ]
-        if config["configured"]:
-            lines.extend(
-                [
-                    "Run **Codespace: Configure team workspace** before asking "
-                    "Copilot to create or modify a Fabric item.",
-                    "",
-                ]
-            )
-        else:
-            lines.extend(
-                [
-                    "The organizer must customize `.codespace/workshop.json` and "
-                    "set `configured` to `true` before participant use.",
-                    "",
-                ]
-            )
+        lines.extend(
+            [
+                "Run **Codespace: Configure team workspace** before asking "
+                "Copilot to create or modify a Fabric item.",
+                "",
+            ]
+        )
         lines.extend(["## Protected workspaces", ""])
         lines.extend(
             _bullets(
                 [_code_span(name) for name in protected],
-                "None declared; organizer configuration is incomplete.",
+                "None declared.",
             )
         )
         context_file.write_text("\n".join(lines) + "\n", encoding="utf-8")
         return status
 
-    if not config["configured"]:
-        raise ValueError(
-            "Organizer setup is incomplete. Customize .codespace/workshop.json "
-            "and set configured to true."
-        )
     if "\n" in workspace_name or "\r" in workspace_name:
         raise ValueError("Workspace name must be a single line")
     if not re.fullmatch(config["workspace"]["namePattern"], workspace_name):
@@ -226,9 +204,7 @@ def write_copilot_instructions(config: dict[str, Any], instructions_file: Path) 
         "",
         *_bullets(
             [_code_span(name) for name in config["workspace"]["protectedWorkspaces"]],
-            "None declared. Stop because organizer configuration is incomplete."
-            if not config["configured"]
-            else "None declared.",
+            "None declared.",
         ),
         "",
         "## Data-handling rules",

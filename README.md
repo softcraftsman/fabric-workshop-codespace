@@ -5,17 +5,16 @@ Participants receive consistent Fabric, Copilot, semantic-modeling, notebook,
 Python, and SQL tooling while Fabric remains the runtime, collaboration, and
 security boundary.
 
-## Organizer setup
+## Optional workshop customization
 
-This repository fails closed until an organizer customizes
-[`.codespace/workshop.json`](.codespace/workshop.json):
+This repository works with its default
+[`.codespace/workshop.json`](.codespace/workshop.json). Organizers may
+optionally customize it for a specific workshop:
 
-1. Create a repository from this GitHub template.
-2. Set the workshop name, workspace-name rule, protected workspaces,
+1. Set the workshop name, workspace-name rule, protected workspaces,
    data-handling rules, and workshop instructions.
-3. Set `configured` to `true`.
-4. Review [organizer setup](guidance/organizer-setup.md).
-5. Launch a clean Codespace and complete the participant-equivalent acceptance
+2. Review [organizer setup](guidance/organizer-setup.md).
+3. Launch a clean Codespace and complete the participant-equivalent acceptance
    test before distributing the repository.
 
 The [Multi-AMC example](.codespace/multi-amc-workshop.json) shows how a workshop

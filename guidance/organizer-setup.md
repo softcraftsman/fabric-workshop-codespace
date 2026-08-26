@@ -1,19 +1,20 @@
-# Organizer Setup
+# Optional Organizer Setup
 
-## Create and configure the workshop repository
+## Customize the workshop
 
-1. Create a private repository from this template.
-2. Edit `.codespace/workshop.json`.
-3. Declare every governed or shared workspace in `protectedWorkspaces`.
-4. Restrict `namePattern` when team workspace names follow a known convention.
-5. Add workshop-specific data-handling rules and instructions.
-6. Set `configured` to `true` only after reviewing the complete configuration.
-7. Require pull-request review for configuration, devcontainer, workflow, and
+The default configuration is ready to use. For workshop-specific guardrails:
+
+1. Edit `.codespace/workshop.json`.
+2. Declare every governed or shared workspace in `protectedWorkspaces`.
+3. Restrict `namePattern` when team workspace names follow a known convention.
+4. Add workshop-specific data-handling rules and instructions.
+5. Review the complete configuration.
+6. Require pull-request review for configuration, devcontainer, workflow, and
    Copilot-instruction changes.
 
-The Codespace setup generates `.workspace/team-context.md` from this one file. Do not
-duplicate workshop names or protected workspace lists in scripts or Copilot
-instructions.
+The Codespace setup generates `.workspace/team-context.md` from this one file.
+Do not duplicate workshop names or protected workspace lists in scripts or
+Copilot instructions.
 
 Codespaces are personal environments. Participants collaborate through their
 Fabric workspace, not a shared running Codespace.
@@ -72,8 +73,8 @@ validated automatically, but Marketplace extensions update through the
 Codespaces prebuild and require the same acceptance test.
 
 The weekly devcontainer workflow is disabled unless the repository variable
-`ENABLE_SCHEDULED_DEVCONTAINER_CHECK` is `true`. Enable it on the maintained
-upstream template; leave it disabled on short-lived workshop repositories.
+`ENABLE_SCHEDULED_DEVCONTAINER_CHECK` is `true`. Enable it when this repository
+should receive regular dependency checks.
 
 ## Devcontainer scripts
 

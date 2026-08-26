@@ -1,7 +1,6 @@
 {
   "$schema": "workshop.schema.json",
   "schemaVersion": 1,
-  "configured": true,
   "workshopName": "Multi-AMC Fabric Workshop",
   "workspace": {
     "namePattern": "^.+$",

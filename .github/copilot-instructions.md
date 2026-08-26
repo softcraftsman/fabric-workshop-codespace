@@ -7,7 +7,7 @@ boundary.
 Before any Fabric operation:
 
 1. Read `.workspace/team-context.md`.
-2. Stop if its status is `ORGANIZER SETUP REQUIRED` or `UNCONFIGURED`.
+2. Stop if its status is `UNCONFIGURED`.
 3. Use only the configured writable workspace.
 4. Confirm the exact workspace through Fabric Explorer or Fabric CLI.
 5. State the target workspace, item name, item type, and proposed change.
