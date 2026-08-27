@@ -11,7 +11,8 @@ if [[ ! -s "${name_file}" ]]; then
 fi
 
 if [[ ! -x "${fab}" ]]; then
-  echo "Fabric CLI is unavailable. Rebuild the Codespace." >&2
+  echo "Workshop setup is incomplete: Fabric CLI is missing." >&2
+  echo "Rebuild the workshop devcontainer." >&2
   exit 1
 fi
 
@@ -35,4 +36,4 @@ if ! printf '%s' "${workspace_json}" | python \
   exit 1
 fi
 
-echo "Fabric RBAC and Fabric Explorer must still confirm write access."
+echo "Confirm Fabric Explorer shows the same workspace and that you have write access."

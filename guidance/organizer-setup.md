@@ -84,5 +84,5 @@ should receive regular dependency checks.
 | `configure-workspace.sh` | Generates participant context from `.codespace/workshop.json` and the assigned workspace name. |
 | `verify-environment.sh` | Confirms required command-line tools and generated context. |
 | `verify-extensions.sh` | Confirms required VS Code extensions after the editor connects. |
-| `fabric-device-login.sh` | Provides an interactive device-code fallback without persisting tokens in the repository. |
+| `fabric-login.sh` | Resolves a participant's tenant from their work email or domain and opens an authenticated Fabric CLI shell. |
 | `verify-live-workspace.sh` | Resolves the exact configured workspace and verifies the returned display name and stable ID. |

@@ -16,12 +16,13 @@ override excessive Fabric permissions.
 
 ## Authentication
 
-Use interactive participant authentication. If normal Fabric CLI login cannot
-complete in a browser-hosted Codespace, use the device-code task. It obtains
-temporary Fabric, OneLake, and Azure tokens and exports them only to the
-interactive shell it opens. The task verifies the configured workspace before
-opening that shell. Run subsequent Fabric CLI commands in the same shell;
-other VS Code task terminals do not inherit its temporary tokens.
+Use the **Fabric: Sign in** task for interactive participant authentication.
+It resolves the tenant from the participant's work email or domain using
+Microsoft's public OpenID metadata, then obtains temporary Fabric, OneLake, and
+Azure tokens. It exports them only to the interactive shell it opens and
+verifies the configured workspace before opening that shell. Run subsequent
+Fabric CLI commands in the same shell; other VS Code task terminals do not
+inherit its temporary tokens.
 
 Because the Codespace has no OS keyring, setup enables Fabric CLI's supported
 plaintext encryption fallback for tokens saved by normal `fab auth login`.

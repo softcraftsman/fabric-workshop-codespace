@@ -28,11 +28,10 @@ Codespace.
 2. Select your assigned workspace in Fabric Explorer.
 3. Run **Tasks: Run Task > Codespace: Configure team workspace** and enter the
    exact same workspace name.
-4. Run **Fabric CLI: Sign in** and then **Fabric CLI: Verify configured
-   workspace**.
-5. If normal sign-in cannot complete, run **Fabric CLI: Sign in with device
-   code**. That task verifies the workspace automatically and opens an
-   authenticated shell; run subsequent Fabric CLI commands inside that shell.
+4. Run **Fabric: Sign in** and enter your commercial-cloud work email or tenant
+   domain. Complete the device-code prompt in your browser. The task resolves
+   the tenant, verifies the workspace, and opens an authenticated shell.
+5. Run subsequent Fabric CLI commands inside that shell.
 6. Confirm Fabric Explorer and Fabric CLI identify the same workspace before
    creating or changing an item.
 

@@ -2,7 +2,7 @@
 set -euo pipefail
 
 if ! command -v code >/dev/null; then
-  echo "VS Code CLI is unavailable; run this check after the Codespace editor connects." >&2
+  echo "VS Code CLI is unavailable. Run this task after the editor connects to the workshop devcontainer." >&2
   exit 1
 fi
 
@@ -26,7 +26,7 @@ done
 
 if (( ${#missing[@]} > 0 )); then
   printf 'Missing required extension: %s\n' "${missing[@]}" >&2
-  echo "Rebuild the Codespace or contact the organizer." >&2
+  echo "Rebuild the workshop devcontainer or contact the organizer." >&2
   exit 1
 fi
 

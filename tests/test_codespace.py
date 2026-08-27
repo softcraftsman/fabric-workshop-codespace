@@ -25,6 +25,10 @@ verify = load_module(
     "verify_workspace_response",
     ROOT / ".devcontainer" / "scripts" / "verify_workspace_response.py",
 )
+resolve_tenant = load_module(
+    "resolve_tenant",
+    ROOT / ".devcontainer" / "scripts" / "resolve_tenant.py",
+)
 
 
 class DevcontainerConfigurationTests(unittest.TestCase):
@@ -39,13 +43,20 @@ class DevcontainerConfigurationTests(unittest.TestCase):
 
     def test_fabric_login_uses_cli_token_audience(self):
         script = (
-            ROOT / ".devcontainer" / "scripts" / "fabric-device-login.sh"
+            ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
         ).read_text()
         self.assertIn(
             "--resource https://analysis.windows.net/powerbi/api",
             script,
         )
         self.assertNotIn("--resource https://api.fabric.microsoft.com", script)
+
+    def test_fabric_login_requires_devcontainer(self):
+        script = (
+            ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
+        ).read_text()
+        self.assertIn("must run inside the workshop devcontainer", script)
+        self.assertIn("Fabric: Sign in again", script)
 
     def test_fabric_cli_encryption_fallback_is_configured(self):
         script = (
@@ -55,6 +66,40 @@ class DevcontainerConfigurationTests(unittest.TestCase):
             'fab" config set encryption_fallback_enabled true',
             script,
         )
+
+    def test_tenant_domain_is_resolved_from_openid_metadata(self):
+        self.assertEqual(
+            resolve_tenant.tenant_id_from_metadata(
+                {
+                    "authorization_endpoint": (
+                        "https://login.microsoftonline.com/"
+                        "11111111-2222-3333-4444-555555555555/oauth2/authorize"
+                    )
+                }
+            ),
+            "11111111-2222-3333-4444-555555555555",
+        )
+
+    def test_work_email_is_normalized_to_domain(self):
+        self.assertEqual(
+            resolve_tenant.normalize_domain(" Participant@Contoso.com "),
+            "contoso.com",
+        )
+
+    def test_invalid_tenant_domain_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "valid work email"):
+            resolve_tenant.normalize_domain("not a domain")
+
+    def test_noncommercial_tenant_authority_is_rejected(self):
+        with self.assertRaisesRegex(ValueError, "commercial"):
+            resolve_tenant.tenant_id_from_metadata(
+                {
+                    "authorization_endpoint": (
+                        "https://login.microsoftonline.us/"
+                        "11111111-2222-3333-4444-555555555555/oauth2/authorize"
+                    )
+                }
+            )
 
 
 class WorkshopConfigurationTests(unittest.TestCase):

@@ -6,13 +6,15 @@ venv="${repo_root}/.venv"
 
 for command in git gh python node npm copilot; do
   command -v "${command}" >/dev/null || {
-    echo "Missing required command: ${command}" >&2
+    echo "Workshop setup is incomplete: ${command} is missing." >&2
+    echo "Rebuild the workshop devcontainer." >&2
     exit 1
   }
 done
 
 if [[ ! -x "${venv}/bin/fab" ]]; then
-  echo "Fabric CLI is missing. Rebuild the Codespace." >&2
+  echo "Workshop setup is incomplete: Fabric CLI is missing." >&2
+  echo "Rebuild the workshop devcontainer." >&2
   exit 1
 fi
 
@@ -20,8 +22,9 @@ fi
 copilot --version
 
 if [[ ! -f "${repo_root}/.workspace/team-context.md" ]]; then
-  echo "Workspace context is missing." >&2
+  echo "Workshop setup is incomplete: workspace context is missing." >&2
+  echo "Rebuild the workshop devcontainer." >&2
   exit 1
 fi
 
-echo "Codespace tooling is available. Fabric sign-in remains user-specific."
+echo "Workshop tooling is ready. Run Fabric: Sign in to authenticate."

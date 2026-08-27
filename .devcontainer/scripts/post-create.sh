@@ -21,14 +21,11 @@ cat <<'MESSAGE'
 
 Fabric Workshop Codespace is ready.
 
-1. Run "Codespace: Verify required extensions".
-2. Open Copilot Chat and send a test prompt.
-3. Run "copilot" and use /login if authentication is required.
-4. Review the optional workshop settings in .codespace/workshop.json.
-5. Run "Codespace: Configure team workspace".
-6. Run "Fabric: Sign in" and select the correct tenant.
-7. Run "Fabric CLI: Sign in". Use the device-code task in browser Codespaces.
-8. Confirm the same workspace in Fabric Explorer and Fabric CLI.
-9. Open README.md before modifying a live Fabric item.
+Participant setup:
+1. Sign in to Fabric Explorer with your workshop identity.
+2. Run "Codespace: Configure team workspace".
+3. Run "Fabric: Sign in" and enter your commercial-cloud work email or domain.
+4. Complete the device-code prompt and keep the authenticated shell open.
+5. Confirm Fabric Explorer and Fabric CLI show the same workspace.
 
 MESSAGE
