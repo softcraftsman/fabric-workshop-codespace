@@ -5,7 +5,7 @@
   "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
   "remoteUser": "vscode",
   "containerEnv": {
-    "BASH_ENV": "${containerWorkspaceFolder}/.devcontainer/scripts/fabric-shell-env.sh",
+    "BASH_ENV": "${containerWorkspaceFolder}/.devcontainer/scripts/fabric-shell-env.sh"
   },
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},

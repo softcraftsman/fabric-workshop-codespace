@@ -77,7 +77,8 @@ controls and recovery expectations.
 
 ## Updating dependencies
 
-Review pinned Fabric CLI and Copilot CLI versions monthly and before every
-event. Update one tool at a time, open a pull request, allow both validation
-workflows to pass, then complete the clean-Codespace acceptance test before
-merging. Rebuild Codespaces prebuilds after any devcontainer change.
+Review the pinned Fabric CLI version and the latest Copilot CLI and Fabric MCP
+releases monthly and before every event. Update one tool at a time when a
+change is required, open a pull request, allow both validation workflows to
+pass, then complete the clean-Codespace acceptance test before merging.
+Rebuild Codespaces prebuilds after any devcontainer change.

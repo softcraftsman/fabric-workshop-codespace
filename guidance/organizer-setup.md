@@ -103,15 +103,15 @@ scripts.
 
 ## Dependency maintenance
 
-Fabric CLI and Copilot CLI are pinned for reproducibility. Fabric MCP tracks
-the latest npm release when the Codespaces prebuild runs. Review upstream
-releases monthly and two weeks before an event. Update pins through a pull
-request, allow the fast and devcontainer validation workflows to pass, and
-repeat the participant-equivalent acceptance test. Rebuild and test the
-prebuild before an event to validate the Fabric MCP version resolved by
-`@latest`. Extension identifiers are validated automatically, but Marketplace
-extensions update through the Codespaces prebuild and require the same
-acceptance test.
+Fabric CLI is pinned for reproducibility. Copilot CLI and Fabric MCP track
+their latest npm releases when the Codespaces prebuild runs. Review upstream
+releases monthly and two weeks before an event. Update the Fabric CLI pin
+through a pull request when required, allow the fast and devcontainer
+validation workflows to pass, and repeat the participant-equivalent acceptance
+test. Rebuild and test the prebuild before an event to validate the Copilot CLI
+and Fabric MCP versions resolved by `@latest`. Extension identifiers are
+validated automatically, but Marketplace extensions update through the
+Codespaces prebuild and require the same acceptance test.
 
 The weekly devcontainer workflow is disabled unless the repository variable
 `ENABLE_SCHEDULED_DEVCONTAINER_CHECK` is `true`. Enable it when this repository
@@ -121,7 +121,7 @@ should receive regular dependency checks.
 
 | Script | Purpose |
 |---|---|
-| `install-tools.sh` | Installs pinned CLIs and shared tooling during image creation or prebuild. |
+| `install-tools.sh` | Installs the pinned Fabric CLI and latest npm-based shared tooling during image creation or prebuild. |
 | `post-create.sh` | Initializes participant-specific shell, Copilot trust, workshop context, and environment checks. |
 | `configure-shell.sh` | Loads shared Fabric authentication in new terminals and trusts only the workshop repository in Copilot CLI. |
 | `configure-context.sh` | Generates workshop guardrails from `.codespace/workshop.json`. |
