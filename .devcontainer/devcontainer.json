@@ -1,6 +1,7 @@
 {
   "name": "Fabric Workshop Codespace",
   "image": "mcr.microsoft.com/devcontainers/python:1-3.12-bookworm",
+  "onCreateCommand": "bash .devcontainer/scripts/install-tools.sh",
   "postCreateCommand": "bash .devcontainer/scripts/post-create.sh",
   "remoteUser": "vscode",
   "containerEnv": {

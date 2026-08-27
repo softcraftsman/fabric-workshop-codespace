@@ -56,6 +56,25 @@ The protected-workspace configuration is a guardrail, not RBAC.
 7. Confirm only the intended workspace is writable.
 8. Use Fabric MCP to inspect a supported item schema.
 9. Open or create a disposable participant-owned item.
+
+## Codespaces prebuild
+
+Configure a prebuild before distributing the workshop repository so shared
+tool installation runs once rather than for every participant:
+
+1. Open the repository's **Settings > Codespaces > Set up prebuild**.
+2. Select the workshop branch and the region nearest the participants.
+3. Update the prebuild on every push while preparing the workshop.
+4. Enable failure notifications and create the prebuild configuration.
+5. Wait for the generated prebuild workflow to succeed.
+6. Create a clean participant-equivalent Codespace from the same branch and
+   region, then complete the acceptance test above.
+
+The devcontainer's `onCreateCommand` installs the shared Python, Fabric CLI,
+and Copilot CLI tooling into the prebuild. Its `postCreateCommand` performs
+only fast per-participant workspace initialization and environment checks.
+Rebuild the prebuild after changing the devcontainer, tool versions, or setup
+scripts.
 10. Have Copilot inspect, propose, and apply a reviewed change.
 11. Save and execute or refresh the item in Fabric.
 12. Validate the workshop's required notebook, model, report, or ontology tools.

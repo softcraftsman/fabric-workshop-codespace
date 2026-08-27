@@ -70,12 +70,26 @@ class DevcontainerConfigurationTests(unittest.TestCase):
 
     def test_fabric_cli_encryption_fallback_is_configured(self):
         script = (
-            ROOT / ".devcontainer" / "scripts" / "post-create.sh"
+            ROOT / ".devcontainer" / "scripts" / "install-tools.sh"
         ).read_text()
         self.assertIn(
             'fab" config set encryption_fallback_enabled true',
             script,
         )
+
+    def test_shared_tools_are_installed_during_prebuild(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        self.assertEqual(
+            devcontainer["onCreateCommand"],
+            "bash .devcontainer/scripts/install-tools.sh",
+        )
+        post_create = (
+            ROOT / ".devcontainer" / "scripts" / "post-create.sh"
+        ).read_text()
+        self.assertNotIn("pip install", post_create)
+        self.assertNotIn("npm install", post_create)
 
     def test_tenant_domain_is_resolved_from_openid_metadata(self):
         self.assertEqual(
