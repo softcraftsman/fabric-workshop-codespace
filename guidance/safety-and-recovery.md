@@ -11,20 +11,19 @@ The organizer must grant participants the least Fabric access needed:
 | Approved shared data and ontology resources | Read |
 | Governed or integration workspaces | No write access |
 
-Copilot instructions and the configured workspace are guardrails. They cannot
-override excessive Fabric permissions.
+Copilot instructions and protected-workspace declarations are guardrails.
+They cannot override excessive Fabric permissions.
 
 ## Authentication
 
 Use the **Fabric: Sign in** task for interactive participant authentication.
-If needed, it first asks for and configures the assigned writable workspace.
 It resolves the tenant from the participant's work email or domain using
 Microsoft's public OpenID metadata, then obtains temporary Fabric, OneLake,
-and Azure tokens. It verifies the configured workspace before opening a shell.
-New Bash terminals refresh temporary Fabric tokens from the participant's
-shared Azure CLI session. The workshop does not copy access tokens into the
-repository or shell startup files; Azure CLI manages its own credential cache.
-Terminals that were already open before sign-in must be reopened.
+and Azure tokens. New Bash terminals refresh temporary Fabric tokens from the
+participant's shared Azure CLI session. The workshop does not copy access
+tokens into the repository or shell startup files; Azure CLI manages its own
+credential cache. Terminals that were already open before sign-in must be
+reopened.
 
 Because the Codespace has no OS keyring, setup enables Fabric CLI's supported
 plaintext encryption fallback for tokens saved by normal `fab auth login`.
@@ -51,7 +50,7 @@ clean up a workspace broadly.
 
 ## Data handling
 
-Follow the rules generated into `.workspace/team-context.md`. At minimum:
+Follow the rules generated into `.workspace/workshop-context.md`. At minimum:
 
 - Do not place credentials, tokens, connection strings, or sensitive data in
   Copilot prompts, terminal logs, or repository files.
@@ -66,4 +65,4 @@ definition exports for checkpoints and preserve reviewed outputs in the
 organizer-designated integration location.
 
 Codespace deletion does not delete saved Fabric items, but it deletes
-unexported local scratch files and generated workspace context.
+unexported local scratch files and generated workshop context.

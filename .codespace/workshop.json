@@ -2,11 +2,7 @@
   "$schema": "workshop.schema.json",
   "schemaVersion": 1,
   "workshopName": "Microsoft Fabric Workshop",
-  "workspace": {
-    "namePattern": "^.+$",
-    "namePatternDescription": "Enter the exact assigned Fabric workspace name.",
-    "protectedWorkspaces": []
-  },
+  "protectedWorkspaces": [],
   "dataHandlingRules": [
     "Use only synthetic, public, aggregate, or explicitly approved data.",
     "Do not place credentials, tokens, connection strings, or sensitive data in Copilot prompts, terminal logs, or repository files."

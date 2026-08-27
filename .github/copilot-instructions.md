@@ -6,16 +6,14 @@ boundary.
 
 Before any Fabric operation:
 
-1. Read `.workspace/team-context.md`.
-2. Stop if its status is `UNCONFIGURED`.
-3. Use only the configured writable workspace.
-4. Confirm the exact workspace through Fabric Explorer or Fabric CLI.
-5. State the target workspace, item name, item type, and proposed change.
-6. Begin with inspection and planning; wait for user confirmation before
+1. Read `.workspace/workshop-context.md`.
+2. Use Fabric Explorer or Fabric CLI to identify the live target.
+3. State the target workspace, item name, item type, and proposed change.
+4. Begin with inspection and planning; wait for user confirmation before
    mutation.
 
 Never create, update, move, publish, or delete items in a protected workspace
-listed in `.workspace/team-context.md`. Permissions, not these instructions,
+listed in `.workspace/workshop-context.md`. Permissions, not these instructions,
 are the authoritative security boundary.
 
 Use Fabric MCP for API specifications, item schemas, and implementation
@@ -30,6 +28,6 @@ When a supported Fabric item definition is opened in VS Code:
   Fabric.
 
 Follow every data-handling rule and workshop instruction in
-`.workspace/team-context.md`. Never place credentials, tokens, connection
+`.workspace/workshop-context.md`. Never place credentials, tokens, connection
 strings, or sensitive data in Copilot prompts, terminal logs, or repository
 files.

@@ -18,16 +18,16 @@ def load_module(name: str, path: Path):
 
 
 configure = load_module(
-    "configure_workspace",
-    ROOT / ".devcontainer" / "scripts" / "configure_workspace.py",
-)
-verify = load_module(
-    "verify_workspace_response",
-    ROOT / ".devcontainer" / "scripts" / "verify_workspace_response.py",
+    "configure_context",
+    ROOT / ".devcontainer" / "scripts" / "configure_context.py",
 )
 resolve_tenant = load_module(
     "resolve_tenant",
     ROOT / ".devcontainer" / "scripts" / "resolve_tenant.py",
+)
+configure_copilot = load_module(
+    "configure_copilot",
+    ROOT / ".devcontainer" / "scripts" / "configure_copilot.py",
 )
 
 
@@ -57,16 +57,6 @@ class DevcontainerConfigurationTests(unittest.TestCase):
         ).read_text()
         self.assertIn("must run inside the workshop devcontainer", script)
         self.assertIn("Fabric: Sign in again", script)
-
-    def test_fabric_login_prompts_for_missing_workspace(self):
-        script = (
-            ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
-        ).read_text()
-        self.assertIn(
-            "Enter your assigned writable Fabric workspace",
-            script,
-        )
-        self.assertIn("configure-workspace.sh", script)
 
     def test_fabric_cli_encryption_fallback_is_configured(self):
         script = (
@@ -114,6 +104,34 @@ class DevcontainerConfigurationTests(unittest.TestCase):
             ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
         ).read_text()
         self.assertIn('auth_config_dir}/tenant-id"', login)
+
+    def test_copilot_trust_preserves_existing_configuration(self):
+        with tempfile.TemporaryDirectory() as temp_dir:
+            root = Path(temp_dir)
+            config_path = root / ".copilot" / "config.json"
+            config_path.parent.mkdir()
+            config_path.write_text(
+                json.dumps(
+                    {
+                        "theme": "dark",
+                        "trustedFolders": ["/workspaces/existing"],
+                    }
+                ),
+                encoding="utf-8",
+            )
+
+            self.assertTrue(
+                configure_copilot.add_trusted_folder(config_path, root)
+            )
+            config = json.loads(config_path.read_text(encoding="utf-8"))
+            self.assertEqual(config["theme"], "dark")
+            self.assertEqual(
+                config["trustedFolders"],
+                ["/workspaces/existing", str(root.resolve())],
+            )
+            self.assertFalse(
+                configure_copilot.add_trusted_folder(config_path, root)
+            )
 
     def test_tenant_domain_is_resolved_from_openid_metadata(self):
         self.assertEqual(
@@ -164,44 +182,14 @@ class WorkshopConfigurationTests(unittest.TestCase):
     def tearDown(self):
         self.temp_dir.cleanup()
 
-    def test_default_configuration_is_ready_to_use(self):
-        result = configure.configure_workspace(
-            self.generic, self.context_dir, "Team Workspace"
-        )
-        self.assertEqual(result, "Team Workspace")
-        status = configure.configure_workspace(
-            self.generic, self.context_dir, ""
-        )
-        self.assertEqual(status, "UNCONFIGURED")
-        context = (self.context_dir / "team-context.md").read_text()
-        self.assertIn("Codespace: Configure team workspace", context)
-
-    def test_multi_amc_profile_preserves_protected_workspaces(self):
-        with self.assertRaisesRegex(ValueError, "is protected"):
-            configure.configure_workspace(
-                self.multi_amc, self.context_dir, "multi-amc hack"
-            )
-
-    def test_configured_workspace_generates_complete_context(self):
-        result = configure.configure_workspace(
-            self.multi_amc, self.context_dir, "Readmissions Team"
-        )
-        self.assertEqual(result, "Readmissions Team")
-        self.assertEqual(
-            (self.context_dir / "team-workspace-name").read_text(),
-            "Readmissions Team\n",
-        )
-        context = (self.context_dir / "team-context.md").read_text()
+    def test_workshop_context_uses_rbac_and_live_confirmation(self):
+        context_file = self.context_dir / "workshop-context.md"
+        configure.write_context(self.multi_amc, context_file)
+        context = context_file.read_text()
         self.assertIn("Multi-AMC Hack Modeling", context)
         self.assertIn("PHI", context)
-        self.assertIn("Readmissions Team", context)
-
-    def test_workspace_name_pattern_is_enforced(self):
-        config = copy.deepcopy(self.multi_amc)
-        config["workspace"]["namePattern"] = r"^Team [0-9]+$"
-        config["workspace"]["namePatternDescription"] = "Use Team followed by a number."
-        with self.assertRaisesRegex(ValueError, "Use Team followed"):
-            configure.configure_workspace(config, self.context_dir, "Readmissions")
+        self.assertIn("Fabric RBAC", context)
+        self.assertIn("Wait for explicit participant confirmation", context)
 
     def test_generated_copilot_instructions_include_protected_workspaces(self):
         instructions = self.context_dir / "workshop.instructions.md"
@@ -210,6 +198,7 @@ class WorkshopConfigurationTests(unittest.TestCase):
         self.assertIn('applyTo: "**"', content)
         self.assertIn("Multi-AMC Hack Modeling", content)
         self.assertIn("PHI", content)
+        self.assertIn("live Fabric context", content)
 
     def test_invalid_configuration_is_rejected(self):
         path = self.context_dir / "invalid.json"
@@ -227,40 +216,6 @@ class WorkshopConfigurationTests(unittest.TestCase):
 
     def test_markdown_code_span_handles_backticks(self):
         self.assertEqual(configure._code_span("Team `One`"), "`` Team `One` ``")
-
-
-class WorkspaceResponseTests(unittest.TestCase):
-    def test_exact_workspace_is_accepted(self):
-        response = {
-            "status": "Success",
-            "result": {
-                "data": {
-                    "id": "11111111-1111-1111-1111-111111111111",
-                    "displayName": "Team 1",
-                }
-            },
-        }
-        self.assertEqual(
-            verify.exact_workspace(response, "Team 1"),
-            ("Team 1", "11111111-1111-1111-1111-111111111111"),
-        )
-
-    def test_substring_workspace_is_rejected(self):
-        response = {
-            "status": "Success",
-            "result": {
-                "data": {
-                    "id": "11111111-1111-1111-1111-111111111111",
-                    "displayName": "Team 10",
-                }
-            },
-        }
-        with self.assertRaisesRegex(ValueError, "not 'Team 1'"):
-            verify.exact_workspace(response, "Team 1")
-
-    def test_failed_response_is_rejected(self):
-        with self.assertRaisesRegex(ValueError, "successful"):
-            verify.exact_workspace({"status": "Failure"}, "Team 1")
 
 
 if __name__ == "__main__":

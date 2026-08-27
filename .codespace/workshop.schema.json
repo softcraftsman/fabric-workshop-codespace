@@ -6,7 +6,7 @@
   "required": [
     "schemaVersion",
     "workshopName",
-    "workspace",
+    "protectedWorkspaces",
     "dataHandlingRules",
     "additionalInstructions"
   ],
@@ -21,32 +21,13 @@
       "type": "string",
       "minLength": 1
     },
-    "workspace": {
-      "type": "object",
-      "additionalProperties": false,
-      "required": [
-        "namePattern",
-        "namePatternDescription",
-        "protectedWorkspaces"
-      ],
-      "properties": {
-        "namePattern": {
-          "type": "string",
-          "minLength": 1
-        },
-        "namePatternDescription": {
-          "type": "string",
-          "minLength": 1
-        },
-        "protectedWorkspaces": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "minLength": 1
-          },
-          "uniqueItems": true
-        }
-      }
+    "protectedWorkspaces": {
+      "type": "array",
+      "items": {
+        "type": "string",
+        "minLength": 1
+      },
+      "uniqueItems": true
     },
     "dataHandlingRules": {
       "type": "array",

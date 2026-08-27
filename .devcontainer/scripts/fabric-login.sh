@@ -33,18 +33,6 @@ if [[ ! -x "${fab}" ]]; then
   exit 1
 fi
 
-if [[ ! -s "${repo_root}/.workspace/team-workspace-name" ]]; then
-  if [[ ! -t 0 ]]; then
-    echo "No writable Fabric workspace is configured." >&2
-    echo "Run Codespace: Configure team workspace, then run Fabric: Sign in." >&2
-    exit 1
-  fi
-
-  read -r -p "Enter your assigned writable Fabric workspace: " workspace_name
-  bash "${repo_root}/.devcontainer/scripts/configure-workspace.sh" \
-    "${workspace_name}"
-fi
-
 tenant_id="$(python "${repo_root}/.devcontainer/scripts/resolve_tenant.py" \
   "${tenant_lookup}")"
 echo "Signing in to Microsoft Entra tenant ${tenant_id}."
@@ -86,15 +74,16 @@ FAB_TOKEN_AZURE="$(az account get-access-token \
 
 "${fab}" auth status
 
-bash "${repo_root}/.devcontainer/scripts/verify-live-workspace.sh"
-
 cat <<'MESSAGE'
 
-Fabric sign-in and workspace verification succeeded.
+Fabric sign-in succeeded.
 The authenticated shell opening now and new Bash terminals can run Fabric CLI
 commands. Already-open terminals must be reopened. Access tokens are refreshed
 from your shared Azure CLI session. The workshop does not copy access tokens
 into the repository or shell startup files.
+
+Before changing a Fabric item, identify the target workspace, item, item type,
+and proposed change, then wait for participant confirmation.
 MESSAGE
 
 exec "${SHELL:-/bin/bash}" -i

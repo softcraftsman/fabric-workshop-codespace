@@ -21,7 +21,7 @@ fi
 "${venv}/bin/fab" --version
 copilot --version
 
-if [[ ! -f "${repo_root}/.workspace/team-context.md" ]]; then
+if [[ ! -f "${repo_root}/.workspace/workshop-context.md" ]]; then
   echo "Workshop setup is incomplete: workspace context is missing." >&2
   echo "Rebuild the workshop devcontainer." >&2
   exit 1

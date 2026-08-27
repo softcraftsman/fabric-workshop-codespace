@@ -6,13 +6,12 @@ The default configuration is ready to use. For workshop-specific guardrails:
 
 1. Edit `.codespace/workshop.json`.
 2. Declare every governed or shared workspace in `protectedWorkspaces`.
-3. Restrict `namePattern` when team workspace names follow a known convention.
-4. Add workshop-specific data-handling rules and instructions.
-5. Review the complete configuration.
-6. Require pull-request review for configuration, devcontainer, workflow, and
+3. Add workshop-specific data-handling rules and instructions.
+4. Review the complete configuration.
+5. Require pull-request review for configuration, devcontainer, workflow, and
    Copilot-instruction changes.
 
-The Codespace setup generates `.workspace/team-context.md` from this one file.
+The Codespace setup generates `.workspace/workshop-context.md` from this file.
 Do not duplicate workshop names or protected workspace lists in scripts or
 Copilot instructions.
 
@@ -50,12 +49,18 @@ The protected-workspace configuration is a guardrail, not RBAC.
 1. Launch a clean Codespace from the customized repository.
 2. Verify required extensions and command-line tools.
 3. Confirm Copilot Chat answers a prompt and Agent mode is available.
-4. Configure the exact assigned workspace.
-5. Sign into Fabric Explorer and Fabric CLI with the same participant identity.
-6. Run **Fabric CLI: Verify configured workspace**.
-7. Confirm only the intended workspace is writable.
-8. Use Fabric MCP to inspect a supported item schema.
-9. Open or create a disposable participant-owned item.
+4. Sign into Fabric Explorer and Fabric CLI with the same participant identity.
+5. Confirm only the intended participant or team workspace is writable.
+6. Use Fabric MCP to inspect a supported item schema.
+7. Open or create a disposable participant-owned item.
+8. Have Copilot identify and present the target workspace, item, item type, and
+   proposed change.
+9. Confirm the target, then have Copilot apply the reviewed change.
+10. Save and execute or refresh the item in Fabric.
+11. Validate the workshop's required notebook, model, report, or ontology tools.
+12. Confirm governed workspaces reject write operations.
+13. Delete the disposable item and rebuild the prebuild if configuration
+    changed.
 
 ## Codespaces prebuild
 
@@ -72,15 +77,9 @@ tool installation runs once rather than for every participant:
 
 The devcontainer's `onCreateCommand` installs the shared Python, Fabric CLI,
 and Copilot CLI tooling into the prebuild. Its `postCreateCommand` performs
-only fast per-participant workspace initialization and environment checks.
+only fast per-participant shell, guardrail, and environment initialization.
 Rebuild the prebuild after changing the devcontainer, tool versions, or setup
 scripts.
-10. Have Copilot inspect, propose, and apply a reviewed change.
-11. Save and execute or refresh the item in Fabric.
-12. Validate the workshop's required notebook, model, report, or ontology tools.
-13. Confirm governed workspaces reject write operations.
-14. Delete the disposable item and rebuild the prebuild if configuration
-    changed.
 
 ## Dependency maintenance
 
@@ -99,9 +98,10 @@ should receive regular dependency checks.
 
 | Script | Purpose |
 |---|---|
-| `post-create.sh` | Creates the virtual environment, installs pinned CLIs, initializes context, and verifies tooling. |
-| `configure-workspace.sh` | Generates participant context from `.codespace/workshop.json` and the assigned workspace name. |
+| `install-tools.sh` | Installs pinned CLIs and shared tooling during image creation or prebuild. |
+| `post-create.sh` | Initializes participant-specific shell, Copilot trust, workshop context, and environment checks. |
+| `configure-shell.sh` | Loads shared Fabric authentication in new terminals and trusts only the workshop repository in Copilot CLI. |
+| `configure-context.sh` | Generates workshop guardrails from `.codespace/workshop.json`. |
 | `verify-environment.sh` | Confirms required command-line tools and generated context. |
 | `verify-extensions.sh` | Confirms required VS Code extensions after the editor connects. |
 | `fabric-login.sh` | Resolves a participant's tenant from their work email or domain and opens an authenticated Fabric CLI shell. |
-| `verify-live-workspace.sh` | Resolves the exact configured workspace and verifies the returned display name and stable ID. |
