@@ -81,6 +81,32 @@ class DevcontainerConfigurationTests(unittest.TestCase):
         self.assertNotIn("pip install", post_create)
         self.assertNotIn("npm install", post_create)
 
+    def test_fabric_mcp_is_registered_for_copilot_cli(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        self.assertEqual(devcontainer["containerEnv"]["FABRIC_MCP_VERSION"], "1.3.0")
+
+        install_tools = (
+            ROOT / ".devcontainer" / "scripts" / "install-tools.sh"
+        ).read_text()
+        self.assertIn(
+            "@microsoft/fabric-mcp@${FABRIC_MCP_VERSION:?}",
+            install_tools,
+        )
+
+        mcp_config = json.loads(
+            (ROOT / ".github" / "mcp.json").read_text()
+        )
+        fabric = mcp_config["mcpServers"]["fabric"]
+        self.assertEqual(fabric["type"], "stdio")
+        self.assertEqual(fabric["command"], "fabmcp")
+        self.assertEqual(
+            fabric["args"],
+            ["server", "start", "--mode", "all"],
+        )
+        self.assertEqual(fabric["tools"], ["*"])
+
     def test_bash_terminals_load_shared_fabric_authentication(self):
         devcontainer = json.loads(
             (ROOT / ".devcontainer" / "devcontainer.json").read_text()

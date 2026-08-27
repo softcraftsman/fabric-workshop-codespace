@@ -1,0 +1,17 @@
+{
+  "mcpServers": {
+    "fabric": {
+      "type": "stdio",
+      "command": "fabmcp",
+      "args": [
+        "server",
+        "start",
+        "--mode",
+        "all"
+      ],
+      "tools": [
+        "*"
+      ]
+    }
+  }
+}

@@ -6,7 +6,8 @@
   "remoteUser": "vscode",
   "containerEnv": {
     "BASH_ENV": "${containerWorkspaceFolder}/.devcontainer/scripts/fabric-shell-env.sh",
-    "COPILOT_CLI_VERSION": "1.0.80"
+    "COPILOT_CLI_VERSION": "1.0.80",
+    "FABRIC_MCP_VERSION": "1.3.0"
   },
   "features": {
     "ghcr.io/devcontainers/features/azure-cli:1": {},

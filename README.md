@@ -27,8 +27,8 @@ security boundary.
 | Modeling | TMDL, Power BI Modeling MCP |
 | Development | GitHub Copilot, Python, Pylance, Jupyter, SQL Server |
 
-Fabric CLI is pinned in `.devcontainer/requirements.txt`; Copilot CLI is pinned
-in `.devcontainer/devcontainer.json`.
+Fabric CLI is pinned in `.devcontainer/requirements.txt`; Copilot CLI and the
+Fabric MCP Server are pinned in `.devcontainer/devcontainer.json`.
 
 ## Optional workshop customization
 
@@ -69,6 +69,7 @@ controls and recovery expectations.
 | `.codespace/` | Workshop configuration, schema, and example profile |
 | `.devcontainer/` | Codespaces image, installation, authentication, and verification |
 | `.github/copilot-instructions.md` | Reusable mutation guardrails |
+| `.github/mcp.json` | Repository-level Fabric MCP registration for Copilot CLI |
 | `.vscode/` | Participant tasks and editor defaults |
 | `guidance/` | Organizer and participant safety guidance |
 | `tests/` | Configuration and workflow tests |

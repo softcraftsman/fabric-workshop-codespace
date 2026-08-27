@@ -83,12 +83,13 @@ scripts.
 
 ## Dependency maintenance
 
-Fabric CLI and Copilot CLI are pinned for reproducibility. Review their
-upstream releases monthly and two weeks before an event. Update pins through a
-pull request, allow the fast and devcontainer validation workflows to pass, and
-repeat the participant-equivalent acceptance test. Extension identifiers are
-validated automatically, but Marketplace extensions update through the
-Codespaces prebuild and require the same acceptance test.
+Fabric CLI, Copilot CLI, and the Fabric MCP Server are pinned for
+reproducibility. Review their upstream releases monthly and two weeks before an
+event. Update pins through a pull request, allow the fast and devcontainer
+validation workflows to pass, and repeat the participant-equivalent acceptance
+test. Extension identifiers are validated automatically, but Marketplace
+extensions update through the Codespaces prebuild and require the same
+acceptance test.
 
 The weekly devcontainer workflow is disabled unless the repository variable
 `ENABLE_SCHEDULED_DEVCONTAINER_CHECK` is `true`. Enable it when this repository
