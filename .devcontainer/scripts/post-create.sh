@@ -12,6 +12,8 @@ python -m pip install --upgrade pip wheel
 python -m pip install --requirement "${repo_root}/.devcontainer/requirements.txt"
 npm install --global "@github/copilot@${COPILOT_CLI_VERSION:?}"
 
+"${venv}/bin/fab" config set encryption_fallback_enabled true
+
 bash "${repo_root}/.devcontainer/scripts/configure-workspace.sh"
 bash "${repo_root}/.devcontainer/scripts/verify-environment.sh"
 

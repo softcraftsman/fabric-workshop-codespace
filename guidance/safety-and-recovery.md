@@ -23,6 +23,11 @@ interactive shell it opens. The task verifies the configured workspace before
 opening that shell. Run subsequent Fabric CLI commands in the same shell;
 other VS Code task terminals do not inherit its temporary tokens.
 
+Because the Codespace has no OS keyring, setup enables Fabric CLI's supported
+plaintext encryption fallback for tokens saved by normal `fab auth login`.
+Treat the Codespace as credential-bearing: stop or delete it after the workshop
+and never copy its Fabric CLI configuration into the repository.
+
 Do not distribute service-principal secrets through the Codespace. If CLI
 authentication remains unavailable, use Fabric Explorer for live discovery
 and item access.

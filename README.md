@@ -40,7 +40,7 @@ Codespace.
 
 | Area | Tools |
 |---|---|
-| Command line | Python 3.12, Azure CLI, Node.js 22, Microsoft Fabric CLI, GitHub Copilot CLI |
+| Command line | Python 3.12, Azure CLI, GitHub CLI, Node.js 22, Microsoft Fabric CLI, GitHub Copilot CLI |
 | Fabric | Microsoft Fabric extension, Fabric MCP Server |
 | Modeling | TMDL, Power BI Modeling MCP |
 | Development | GitHub Copilot, Python, Pylance, Jupyter, SQL Server |

@@ -27,6 +27,36 @@ verify = load_module(
 )
 
 
+class DevcontainerConfigurationTests(unittest.TestCase):
+    def test_github_cli_is_installed(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        self.assertIn(
+            "ghcr.io/devcontainers/features/github-cli:1",
+            devcontainer["features"],
+        )
+
+    def test_fabric_login_uses_cli_token_audience(self):
+        script = (
+            ROOT / ".devcontainer" / "scripts" / "fabric-device-login.sh"
+        ).read_text()
+        self.assertIn(
+            "--resource https://analysis.windows.net/powerbi/api",
+            script,
+        )
+        self.assertNotIn("--resource https://api.fabric.microsoft.com", script)
+
+    def test_fabric_cli_encryption_fallback_is_configured(self):
+        script = (
+            ROOT / ".devcontainer" / "scripts" / "post-create.sh"
+        ).read_text()
+        self.assertIn(
+            'fab" config set encryption_fallback_enabled true',
+            script,
+        )
+
+
 class WorkshopConfigurationTests(unittest.TestCase):
     def setUp(self):
         self.generic = configure.load_config(

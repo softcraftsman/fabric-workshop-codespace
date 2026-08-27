@@ -43,7 +43,7 @@ export FAB_TENANT_ID="${tenant_id}"
 export FAB_TOKEN
 FAB_TOKEN="$(az account get-access-token \
   --tenant "${tenant_id}" \
-  --resource https://api.fabric.microsoft.com \
+  --resource https://analysis.windows.net/powerbi/api \
   --query accessToken \
   --output tsv)"
 export FAB_TOKEN_ONELAKE
