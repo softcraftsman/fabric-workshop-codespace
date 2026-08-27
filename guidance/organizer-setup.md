@@ -33,6 +33,26 @@ Installation does not prove entitlement or service access. Test Copilot Chat,
 Agent mode, Fabric Explorer, and Fabric MCP with a participant-equivalent
 GitHub identity.
 
+## Extension rationale
+
+| Extension | Why it is preinstalled |
+|---|---|
+| `GitHub.copilot` | Provides inline code completion and next-edit assistance for workshop development. |
+| `GitHub.copilot-chat` | Provides the Chat and Agent interfaces that apply repository instructions and orchestrate MCP tools. |
+| `fabric.vscode-fabric` | Provides Fabric sign-in, workspace and item navigation, and opening Fabric item definitions in VS Code. |
+| `fabric.vscode-fabric-mcp-server` | Registers Fabric API specifications, item schemas, examples, and best practices with VS Code Copilot. Copilot CLI uses the separate repository-level `.github/mcp.json` registration. |
+| `analysis-services.TMDL` | Adds syntax highlighting, completion, formatting, diagnostics, and navigation for TMDL semantic-model definitions. |
+| `analysis-services.powerbi-modeling-mcp` | Enables agent-assisted inspection, validation, and modification of Power BI and Fabric semantic models. |
+| `ms-python.python` | Provides Python environment selection, execution, debugging, and test integration for workshop scripts and notebooks. |
+| `ms-python.vscode-pylance` | Adds Python IntelliSense, type analysis, navigation, and diagnostics on top of the Python extension. |
+| `ms-toolsai.jupyter` | Provides native `.ipynb` editing, cell execution, debugging, rich output, and variable inspection. |
+| `ms-mssql.mssql` | Provides connections, Object Explorer, IntelliSense, query execution, and result inspection for Fabric SQL endpoints and warehouses. |
+
+The Fabric, Copilot Chat, and Fabric MCP extensions form the core guided
+experience. TMDL, Power BI Modeling MCP, Python, Pylance, Jupyter, and MSSQL
+support the corresponding workshop workloads and may be removed together with
+their acceptance criteria when those workloads are explicitly out of scope.
+
 ## Fabric authorization
 
 - Grant Contributor only on the assigned participant or team workspace.
@@ -83,11 +103,13 @@ scripts.
 
 ## Dependency maintenance
 
-Fabric CLI, Copilot CLI, and the Fabric MCP Server are pinned for
-reproducibility. Review their upstream releases monthly and two weeks before an
-event. Update pins through a pull request, allow the fast and devcontainer
-validation workflows to pass, and repeat the participant-equivalent acceptance
-test. Extension identifiers are validated automatically, but Marketplace
+Fabric CLI and Copilot CLI are pinned for reproducibility. Fabric MCP tracks
+the latest npm release when the Codespaces prebuild runs. Review upstream
+releases monthly and two weeks before an event. Update pins through a pull
+request, allow the fast and devcontainer validation workflows to pass, and
+repeat the participant-equivalent acceptance test. Rebuild and test the
+prebuild before an event to validate the Fabric MCP version resolved by
+`@latest`. Extension identifiers are validated automatically, but Marketplace
 extensions update through the Codespaces prebuild and require the same
 acceptance test.
 

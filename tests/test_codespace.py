@@ -85,15 +85,12 @@ class DevcontainerConfigurationTests(unittest.TestCase):
         devcontainer = json.loads(
             (ROOT / ".devcontainer" / "devcontainer.json").read_text()
         )
-        self.assertEqual(devcontainer["containerEnv"]["FABRIC_MCP_VERSION"], "1.3.0")
+        self.assertNotIn("FABRIC_MCP_VERSION", devcontainer["containerEnv"])
 
         install_tools = (
             ROOT / ".devcontainer" / "scripts" / "install-tools.sh"
         ).read_text()
-        self.assertIn(
-            "@microsoft/fabric-mcp@${FABRIC_MCP_VERSION:?}",
-            install_tools,
-        )
+        self.assertIn("@microsoft/fabric-mcp@latest", install_tools)
 
         mcp_config = json.loads(
             (ROOT / ".github" / "mcp.json").read_text()
@@ -106,6 +103,15 @@ class DevcontainerConfigurationTests(unittest.TestCase):
             ["server", "start", "--mode", "all"],
         )
         self.assertEqual(fabric["tools"], ["*"])
+
+    def test_every_installed_extension_has_documented_rationale(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        rationale = (ROOT / "guidance" / "organizer-setup.md").read_text()
+        for extension in devcontainer["customizations"]["vscode"]["extensions"]:
+            with self.subTest(extension=extension):
+                self.assertIn(f"`{extension}`", rationale)
 
     def test_bash_terminals_load_shared_fabric_authentication(self):
         devcontainer = json.loads(

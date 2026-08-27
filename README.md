@@ -27,8 +27,9 @@ security boundary.
 | Modeling | TMDL, Power BI Modeling MCP |
 | Development | GitHub Copilot, Python, Pylance, Jupyter, SQL Server |
 
-Fabric CLI is pinned in `.devcontainer/requirements.txt`; Copilot CLI and the
-Fabric MCP Server are pinned in `.devcontainer/devcontainer.json`.
+Fabric CLI is pinned in `.devcontainer/requirements.txt`, and Copilot CLI is
+pinned in `.devcontainer/devcontainer.json`. Fabric MCP tracks its latest npm
+release whenever the Codespaces prebuild is rebuilt.
 
 ## Optional workshop customization
 
