@@ -58,6 +58,16 @@ class DevcontainerConfigurationTests(unittest.TestCase):
         self.assertIn("must run inside the workshop devcontainer", script)
         self.assertIn("Fabric: Sign in again", script)
 
+    def test_fabric_login_prompts_for_missing_workspace(self):
+        script = (
+            ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
+        ).read_text()
+        self.assertIn(
+            "Enter your assigned writable Fabric workspace",
+            script,
+        )
+        self.assertIn("configure-workspace.sh", script)
+
     def test_fabric_cli_encryption_fallback_is_configured(self):
         script = (
             ROOT / ".devcontainer" / "scripts" / "post-create.sh"

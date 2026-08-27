@@ -23,8 +23,8 @@ Fabric Workshop Codespace is ready.
 
 Participant setup:
 1. Sign in to Fabric Explorer with your workshop identity.
-2. Run "Codespace: Configure team workspace".
-3. Run "Fabric: Sign in" and enter your commercial-cloud work email or domain.
+2. Run "Fabric: Sign in".
+3. Enter your assigned workspace and commercial-cloud work email when prompted.
 4. Complete the device-code prompt and keep the authenticated shell open.
 5. Confirm Fabric Explorer and Fabric CLI show the same workspace.
 

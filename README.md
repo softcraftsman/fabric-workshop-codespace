@@ -5,32 +5,16 @@ Participants receive consistent Fabric, Copilot, semantic-modeling, notebook,
 Python, and SQL tooling while Fabric remains the runtime, collaboration, and
 security boundary.
 
-## Optional workshop customization
-
-This repository works with its default
-[`.codespace/workshop.json`](.codespace/workshop.json). Organizers may
-optionally customize it for a specific workshop:
-
-1. Set the workshop name, workspace-name rule, protected workspaces,
-   data-handling rules, and workshop instructions.
-2. Review [organizer setup](guidance/organizer-setup.md).
-3. Launch a clean Codespace and complete the participant-equivalent acceptance
-   test before distributing the repository.
-
-The [Multi-AMC example](.codespace/multi-amc-workshop.json) shows how a workshop
-profile can add domain-specific protections without changing the reusable
-Codespace.
-
 ## Participant start
 
 1. Open Fabric Explorer from the Fabric icon in the Activity Bar. Sign in and
    select the organizer-designated Microsoft Entra tenant.
 2. Select your assigned workspace in Fabric Explorer.
-3. Run **Tasks: Run Task > Codespace: Configure team workspace** and enter the
-   exact same workspace name.
-4. Run **Fabric: Sign in** and enter your commercial-cloud work email or tenant
-   domain. Complete the device-code prompt in your browser. The task resolves
-   the tenant, verifies the workspace, and opens an authenticated shell.
+3. Run **Tasks: Run Task > Fabric: Sign in**. The task asks for your assigned
+   workspace if it is not already configured, then asks for your
+   commercial-cloud work email or tenant domain.
+4. Complete the device-code prompt in your browser. The task resolves the
+   tenant, verifies the workspace, and opens an authenticated shell.
 5. Run subsequent Fabric CLI commands inside that shell.
 6. Confirm Fabric Explorer and Fabric CLI identify the same workspace before
    creating or changing an item.
@@ -46,6 +30,22 @@ Codespace.
 
 Fabric CLI is pinned in `.devcontainer/requirements.txt`; Copilot CLI is pinned
 in `.devcontainer/devcontainer.json`.
+
+## Optional workshop customization
+
+This repository works with its default
+[`.codespace/workshop.json`](.codespace/workshop.json). Organizers may
+optionally customize it for a specific workshop:
+
+1. Set the workshop name, workspace-name rule, protected workspaces,
+   data-handling rules, and workshop instructions.
+2. Review [organizer setup](guidance/organizer-setup.md).
+3. Launch a clean Codespace and complete the participant-equivalent acceptance
+   test before distributing the repository.
+
+The [Multi-AMC example](.codespace/multi-amc-workshop.json) shows how a workshop
+profile can add domain-specific protections without changing the reusable
+Codespace.
 
 ## Safety model
 

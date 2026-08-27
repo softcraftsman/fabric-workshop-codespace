@@ -34,9 +34,15 @@ if [[ ! -x "${fab}" ]]; then
 fi
 
 if [[ ! -s "${repo_root}/.workspace/team-workspace-name" ]]; then
-  echo "No writable Fabric workspace is configured." >&2
-  echo "Run Codespace: Configure team workspace, then run Fabric: Sign in." >&2
-  exit 1
+  if [[ ! -t 0 ]]; then
+    echo "No writable Fabric workspace is configured." >&2
+    echo "Run Codespace: Configure team workspace, then run Fabric: Sign in." >&2
+    exit 1
+  fi
+
+  read -r -p "Enter your assigned writable Fabric workspace: " workspace_name
+  bash "${repo_root}/.devcontainer/scripts/configure-workspace.sh" \
+    "${workspace_name}"
 fi
 
 tenant_id="$(python "${repo_root}/.devcontainer/scripts/resolve_tenant.py" \

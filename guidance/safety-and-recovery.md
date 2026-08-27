@@ -17,9 +17,10 @@ override excessive Fabric permissions.
 ## Authentication
 
 Use the **Fabric: Sign in** task for interactive participant authentication.
+If needed, it first asks for and configures the assigned writable workspace.
 It resolves the tenant from the participant's work email or domain using
-Microsoft's public OpenID metadata, then obtains temporary Fabric, OneLake, and
-Azure tokens. It exports them only to the interactive shell it opens and
+Microsoft's public OpenID metadata, then obtains temporary Fabric, OneLake,
+and Azure tokens. It exports them only to the interactive shell it opens and
 verifies the configured workspace before opening that shell. Run subsequent
 Fabric CLI commands in the same shell; other VS Code task terminals do not
 inherit its temporary tokens.
