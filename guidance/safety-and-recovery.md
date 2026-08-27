@@ -20,10 +20,11 @@ Use the **Fabric: Sign in** task for interactive participant authentication.
 If needed, it first asks for and configures the assigned writable workspace.
 It resolves the tenant from the participant's work email or domain using
 Microsoft's public OpenID metadata, then obtains temporary Fabric, OneLake,
-and Azure tokens. It exports them only to the interactive shell it opens and
-verifies the configured workspace before opening that shell. Run subsequent
-Fabric CLI commands in the same shell; other VS Code task terminals do not
-inherit its temporary tokens.
+and Azure tokens. It verifies the configured workspace before opening a shell.
+New Bash terminals refresh temporary Fabric tokens from the participant's
+shared Azure CLI session. The workshop does not copy access tokens into the
+repository or shell startup files; Azure CLI manages its own credential cache.
+Terminals that were already open before sign-in must be reopened.
 
 Because the Codespace has no OS keyring, setup enables Fabric CLI's supported
 plaintext encryption fallback for tokens saved by normal `fab auth login`.

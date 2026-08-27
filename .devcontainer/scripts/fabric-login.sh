@@ -55,6 +55,11 @@ az login \
   --allow-no-subscriptions \
   --output none
 
+auth_config_dir="${XDG_CONFIG_HOME:-${HOME}/.config}/fabric-workshop"
+install -d -m 700 "${auth_config_dir}"
+printf '%s\n' "${tenant_id}" >"${auth_config_dir}/tenant-id"
+chmod 600 "${auth_config_dir}/tenant-id"
+
 # Clear a persisted service-principal or managed-identity mode, which takes
 # precedence over externally supplied user tokens in Fabric CLI.
 "${fab}" auth logout >/dev/null 2>&1 || true
@@ -86,9 +91,10 @@ bash "${repo_root}/.devcontainer/scripts/verify-live-workspace.sh"
 cat <<'MESSAGE'
 
 Fabric sign-in and workspace verification succeeded.
-Use the authenticated shell opening now for all Fabric CLI commands.
-When finished, run "exit". Temporary tokens remain in this shell and are
-not written to the repository or shared with other task terminals.
+The authenticated shell opening now and new Bash terminals can run Fabric CLI
+commands. Already-open terminals must be reopened. Access tokens are refreshed
+from your shared Azure CLI session. The workshop does not copy access tokens
+into the repository or shell startup files.
 MESSAGE
 
 exec "${SHELL:-/bin/bash}" -i

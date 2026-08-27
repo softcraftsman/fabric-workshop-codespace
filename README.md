@@ -15,7 +15,8 @@ security boundary.
    commercial-cloud work email or tenant domain.
 4. Complete the device-code prompt in your browser. The task resolves the
    tenant, verifies the workspace, and opens an authenticated shell.
-5. Run subsequent Fabric CLI commands inside that shell.
+5. Run Fabric CLI commands in that shell or any new Bash terminal. Reopen
+   terminals that were already open when you signed in.
 6. Confirm Fabric Explorer and Fabric CLI identify the same workspace before
    creating or changing an item.
 

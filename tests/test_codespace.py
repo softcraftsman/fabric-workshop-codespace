@@ -91,6 +91,30 @@ class DevcontainerConfigurationTests(unittest.TestCase):
         self.assertNotIn("pip install", post_create)
         self.assertNotIn("npm install", post_create)
 
+    def test_bash_terminals_load_shared_fabric_authentication(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        self.assertEqual(
+            devcontainer["containerEnv"]["BASH_ENV"],
+            "${containerWorkspaceFolder}/.devcontainer/scripts/fabric-shell-env.sh",
+        )
+        post_create = (
+            ROOT / ".devcontainer" / "scripts" / "post-create.sh"
+        ).read_text()
+        self.assertIn("configure-shell.sh", post_create)
+
+    def test_shell_authentication_refreshes_without_storing_tokens(self):
+        shell_env = (
+            ROOT / ".devcontainer" / "scripts" / "fabric-shell-env.sh"
+        ).read_text()
+        self.assertIn("az account get-access-token", shell_env)
+        self.assertIn('export FAB_TOKEN="${fabric_token}"', shell_env)
+        login = (
+            ROOT / ".devcontainer" / "scripts" / "fabric-login.sh"
+        ).read_text()
+        self.assertIn('auth_config_dir}/tenant-id"', login)
+
     def test_tenant_domain_is_resolved_from_openid_metadata(self):
         self.assertEqual(
             resolve_tenant.tenant_id_from_metadata(

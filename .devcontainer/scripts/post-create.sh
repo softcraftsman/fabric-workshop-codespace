@@ -3,6 +3,7 @@ set -euo pipefail
 
 repo_root="$(cd "$(dirname "${BASH_SOURCE[0]}")/../.." && pwd)"
 
+bash "${repo_root}/.devcontainer/scripts/configure-shell.sh"
 bash "${repo_root}/.devcontainer/scripts/configure-workspace.sh"
 bash "${repo_root}/.devcontainer/scripts/verify-environment.sh"
 
