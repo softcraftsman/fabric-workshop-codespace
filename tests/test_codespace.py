@@ -113,6 +113,21 @@ class DevcontainerConfigurationTests(unittest.TestCase):
             with self.subTest(extension=extension):
                 self.assertIn(f"`{extension}`", rationale)
 
+    def test_copilot_cli_profile_opens_in_terminal_editor(self):
+        devcontainer = json.loads(
+            (ROOT / ".devcontainer" / "devcontainer.json").read_text()
+        )
+        settings = devcontainer["customizations"]["vscode"]["settings"]
+        self.assertEqual(
+            settings["terminal.integrated.defaultLocation"],
+            "editor",
+        )
+        copilot_profile = settings["terminal.integrated.profiles.linux"][
+            "Copilot CLI"
+        ]
+        self.assertEqual(copilot_profile["path"], "/bin/bash")
+        self.assertEqual(copilot_profile["args"], ["-lc", "exec copilot"])
+
     def test_bash_terminals_load_shared_fabric_authentication(self):
         devcontainer = json.loads(
             (ROOT / ".devcontainer" / "devcontainer.json").read_text()

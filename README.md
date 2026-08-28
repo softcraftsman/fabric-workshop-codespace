@@ -18,6 +18,10 @@ security boundary.
 5. Before every modification, confirm the live target workspace, item name,
    item type, and proposed change.
 
+To use the terminal agent, run **Terminal: Create New Terminal (With Profile)**
+and select **Copilot CLI**. Workshop terminals open as editor tabs so Copilot
+CLI can remain beside the files being edited.
+
 ## Installed tools
 
 | Area | Tools |
@@ -27,9 +31,9 @@ security boundary.
 | Modeling | TMDL, Power BI Modeling MCP |
 | Development | GitHub Copilot, Python, Pylance, Jupyter, SQL Server |
 
-Fabric CLI is pinned in `.devcontainer/requirements.txt`, and Copilot CLI is
-pinned in `.devcontainer/devcontainer.json`. Fabric MCP tracks its latest npm
-release whenever the Codespaces prebuild is rebuilt.
+Fabric CLI is pinned in `.devcontainer/requirements.txt`. Copilot CLI and
+Fabric MCP track their latest npm releases whenever the Codespaces prebuild is
+rebuilt.
 
 ## Optional workshop customization
 

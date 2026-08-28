@@ -38,7 +38,6 @@ GitHub identity.
 | Extension | Why it is preinstalled |
 |---|---|
 | `GitHub.copilot` | Provides inline code completion and next-edit assistance for workshop development. |
-| `GitHub.copilot-chat` | Provides the Chat and Agent interfaces that apply repository instructions and orchestrate MCP tools. |
 | `fabric.vscode-fabric` | Provides Fabric sign-in, workspace and item navigation, and opening Fabric item definitions in VS Code. |
 | `fabric.vscode-fabric-mcp-server` | Registers Fabric API specifications, item schemas, examples, and best practices with VS Code Copilot. Copilot CLI uses the separate repository-level `.github/mcp.json` registration. |
 | `analysis-services.TMDL` | Adds syntax highlighting, completion, formatting, diagnostics, and navigation for TMDL semantic-model definitions. |
@@ -48,10 +47,12 @@ GitHub identity.
 | `ms-toolsai.jupyter` | Provides native `.ipynb` editing, cell execution, debugging, rich output, and variable inspection. |
 | `ms-mssql.mssql` | Provides connections, Object Explorer, IntelliSense, query execution, and result inspection for Fabric SQL endpoints and warehouses. |
 
-The Fabric, Copilot Chat, and Fabric MCP extensions form the core guided
-experience. TMDL, Power BI Modeling MCP, Python, Pylance, Jupyter, and MSSQL
-support the corresponding workshop workloads and may be removed together with
-their acceptance criteria when those workloads are explicitly out of scope.
+Copilot Chat is bundled with VS Code and is not installed separately by the
+devcontainer. Fabric Explorer, bundled Copilot Chat, and Fabric MCP form the
+core guided experience. TMDL, Power BI Modeling MCP, Python, Pylance, Jupyter,
+and MSSQL support the corresponding workshop workloads and may be removed
+together with their acceptance criteria when those workloads are explicitly
+out of scope.
 
 ## Fabric authorization
 
